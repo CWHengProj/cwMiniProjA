@@ -8,10 +8,12 @@ import com.cwheng.playOTG.miniProj.Model.User;
 @Repository
 public class AccountRepo {
 
-    public User createNewAccount() {
-        // TODO Auto-generated method stub
-        User user = new User();
-        return user;
+    public void createNewAccount(User user) {
+        // TODO add to repository
+    }
+
+    public boolean userExists(User user) {
+        //perform a check if user exists in the database        
     }
 
     //TODO simple encryption for the password before storing the password in the db.

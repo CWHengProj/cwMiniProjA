@@ -19,38 +19,49 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class gameController {
     @Autowired
     AccountCreationService acService;
-
     @GetMapping("/aboutGame")
     public String rulePage() {
-        return "rulePage"; //either create new character or log in
+        return "rulePage";
     }
-
     @GetMapping("/accountCreation")
-    public String createNewAccount(Model model) {
+    public String createAccount(Model model) {
         User user = new User();
         model.addAttribute("user",user);
         return "signUp";
     }
     @PostMapping("/accountCreation")
-    public String postMethodName(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
-        //Account validation
+    public String saveAccount(@Valid @ModelAttribute("user") User user, BindingResult result) {
         if (result.hasErrors()){
             return "signUp";
         }
+        acService.createNewAccount(user);
+        return "gamePage";
+    }
 
-        //figure out how to do either the Oauth or spring security to create a user.
-        //recap on sessions?
-        
-        user = acService.createNewAccount();
-        model.addAttribute("user", user);
-        return null;//leads to the game to start?
+    @GetMapping("/login")
+    public String userLogin(Model model) {
+        User user = new User();
+        model.addAttribute("user",user);
+        return "login";
+    }
+    @PostMapping("/login")
+    public String saveLogin(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
+        //Account validation
+        if (result.hasErrors() || !acService.userExists(user)){
+            return "login";
+        }
+        //TODO check if the account exists.
+        //TODO contain button to send user to registration instead
+        return "gamePage";
     }
     @GetMapping("/playGame")
     public String playGame() {
         //display the stats of user based on their account
+        //TODO ensure that user is logged in before they can access this page
         //contain a save button that saves their session before they choose to leave the game
-        //have an option to delete account as well?
-        return null;
+
+
+        return "gamePage";
     }
     
         

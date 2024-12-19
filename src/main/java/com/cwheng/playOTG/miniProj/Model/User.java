@@ -1,18 +1,16 @@
 package com.cwheng.playOTG.miniProj.Model;
 
 import java.util.List;
-import java.util.UUID;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public class User {
-    //user properties
-    //TODO validation
     @NotBlank(message="This is a required field.")
     @Email(message="Please enter a valid email address.")
     private String email;
+    //TODO check if email already exists before adding to the database.
     @NotBlank(message="This is a required field.")
     @Size(min=5, max=128, message = "User Name must contain at least 5 characters.")
     private String userName;
@@ -20,7 +18,6 @@ public class User {
     @Size(min=8, max=128, message = "User Name must contain at least 8 characters.")
     private String password; //TODO: password has to be hashed before we cache it
     private String userProfilePhoto; // TODO add the user profile pic using DiceBear api
-    private String uuID; //TODO how to make uuid? how to incorporate into user login
     private Integer stamina;
     private Integer skill;
     private Integer luck;
@@ -35,7 +32,6 @@ public class User {
 
     
     public User() {
-        uuID= UUID.randomUUID().toString();
         //TODO user creation randomization
         skill = 7; //1 dice /2
         stamina = 10; // 2 dice
@@ -81,16 +77,6 @@ public class User {
 
     public void setUserProfilePhoto(String userProfilePhoto) {
         this.userProfilePhoto = userProfilePhoto;
-    }
-
-
-    public String getUuID() {
-        return uuID;
-    }
-
-
-    public void setUuID(String uuID) {
-        this.uuID = uuID;
     }
 
 
