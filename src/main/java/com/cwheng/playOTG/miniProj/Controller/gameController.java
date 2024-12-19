@@ -3,10 +3,15 @@ package com.cwheng.playOTG.miniProj.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.cwheng.playOTG.miniProj.Model.User;
 import com.cwheng.playOTG.miniProj.Service.AccountCreationService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.PostMapping;
     
 @Controller
@@ -21,16 +26,22 @@ public class gameController {
     }
 
     @GetMapping("/accountCreation")
-    public String createNewAccount() {
-        return "accountCreation";
+    public String createNewAccount(Model model) {
+        User user = new User();
+        model.addAttribute("user",user);
+        return "signUp";
     }
     @PostMapping("/accountCreation")
-    public String postMethodName(Model model) {
-        //TODO: create the new users here
+    public String postMethodName(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
+        //Account validation
+        if (result.hasErrors()){
+            return "signUp";
+        }
+
         //figure out how to do either the Oauth or spring security to create a user.
         //recap on sessions?
         
-        User user = acService.createNewAccount();
+        user = acService.createNewAccount();
         model.addAttribute("user", user);
         return null;//leads to the game to start?
     }

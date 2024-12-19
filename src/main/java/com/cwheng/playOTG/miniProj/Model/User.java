@@ -3,10 +3,23 @@ package com.cwheng.playOTG.miniProj.Model;
 import java.util.List;
 import java.util.UUID;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 public class User {
     //user properties
     //TODO validation
+    @NotBlank(message="This is a required field.")
+    @Email(message="Please enter a valid email address.")
+    private String email;
+    @NotBlank(message="This is a required field.")
+    @Size(min=5, max=128, message = "User Name must contain at least 5 characters.")
     private String userName;
+    @NotBlank(message="This is a required field.")
+    @Size(min=8, max=128, message = "User Name must contain at least 8 characters.")
+    private String password; //TODO: password has to be hashed before we cache it
+    private String userProfilePhoto; // TODO add the user profile pic using DiceBear api
     private String uuID; //TODO how to make uuid? how to incorporate into user login
     private Integer stamina;
     private Integer skill;
@@ -27,11 +40,17 @@ public class User {
         skill = 7; //1 dice /2
         stamina = 10; // 2 dice
         luck = 6; //1 dice
-        gold = 6; //2 dice
-        
+        gold = 6; //2 dice     
+    }
 
 
-     
+    public String getEmail() {
+        return email;
+    }
+
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 
@@ -42,6 +61,26 @@ public class User {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+
+    public String getPassword() {
+        return password;
+    }
+
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+
+    public String getUserProfilePhoto() {
+        return userProfilePhoto;
+    }
+
+
+    public void setUserProfilePhoto(String userProfilePhoto) {
+        this.userProfilePhoto = userProfilePhoto;
     }
 
 
@@ -164,8 +203,6 @@ public class User {
         this.endingsReached = endingsReached;
     }
     
-    
-
 
 
 }
