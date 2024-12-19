@@ -24,9 +24,9 @@ public class AccountCreationService {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getUserDetails'");
     }
-    public boolean userExists(User user) {
+    public boolean correctCredentials(User user) {
         //TODO retrieve user Info from repo, return if user exists.
-        return acRepo.userExists(user);
+        return acRepo.correctCredentials(user);
         
     }
     

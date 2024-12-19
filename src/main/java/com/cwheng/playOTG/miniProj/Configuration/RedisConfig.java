@@ -10,6 +10,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
+import com.cwheng.playOTG.miniProj.Constant.Constant;
+
 @Configuration
 public class RedisConfig {
     @Value("${spring.data.redis.host}")

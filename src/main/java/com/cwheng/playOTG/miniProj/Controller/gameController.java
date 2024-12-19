@@ -35,7 +35,7 @@ public class gameController {
             return "signUp";
         }
         acService.createNewAccount(user);
-        return "gamePage";
+        return "login";
     }
 
     @GetMapping("/login")
@@ -47,7 +47,7 @@ public class gameController {
     @PostMapping("/login")
     public String saveLogin(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
         //Account validation
-        if (result.hasErrors() || !acService.userExists(user)){
+        if (result.hasErrors() || !acService.correctCredentials(user)){
             return "login";
         }
         //TODO check if the account exists.
