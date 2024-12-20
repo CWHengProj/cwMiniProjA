@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.PostMapping;
     
 @Controller
 @RequestMapping("")
-public class gameController {
+public class phoneController {
     @Autowired
     AccountCreationService acService;
-    @GetMapping("/aboutGame")
+    @GetMapping("/homePage")
     public String rulePage() {
-        return "rulePage";
+        return "homePage";
     }
     @GetMapping("/accountCreation")
     public String createAccount(Model model) {
@@ -50,18 +50,15 @@ public class gameController {
         if (result.hasErrors() || !acService.correctCredentials(user)){
             return "login";
         }
-        //TODO check if the account exists.
-        //TODO contain button to send user to registration instead
-        return "gamePage";
+        //TODO check if valid username and password
+        return "userHome";
     }
-    @GetMapping("/playGame")
+    @GetMapping("/userHome")
     public String playGame() {
-        //display the stats of user based on their account
         //TODO ensure that user is logged in before they can access this page
-        //contain a save button that saves their session before they choose to leave the game
 
 
-        return "gamePage";
+        return "userHome";
     }
     
         
