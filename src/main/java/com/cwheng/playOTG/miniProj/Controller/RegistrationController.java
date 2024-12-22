@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -15,23 +14,33 @@ import com.cwheng.playOTG.miniProj.Service.AccountHandlingService;
 
 import jakarta.validation.Valid;
 
+import org.springframework.web.bind.annotation.PostMapping;
+
+
+    
 @Controller
 @RequestMapping("")
-public class LoginController {
+public class RegistrationController{
     @Autowired
-    AccountHandlingService ahService; 
-    @GetMapping("/login")
-    public String userLogin(@ModelAttribute("user") UserRegistration user, Model model) {
+    AccountHandlingService acService;
+    @GetMapping("/accountCreation")
+    public String createNewAccount(Model model) {
+        UserRegistration user = new UserRegistration();
         model.addAttribute("user",user);
-        return "login";
+        return "signUp";
     }
-    @PostMapping("/login")
-    public String postLogin(@Valid @ModelAttribute("user") UserRegistration user, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
-        //Account validation
-        if (result.hasErrors() || !ahService.correctCredentials(user)){
+    @PostMapping("/accountCreation")
+    public String postNewAccount(@Valid @ModelAttribute("user") UserRegistration user, BindingResult result) {
+        if (result.hasErrors()){
+            return "signUp";
+        }
+        if(acService.createNewAccount(user)){
             return "login";
         }
-        redirectAttributes.addFlashAttribute("user",user);
-        return "redirect:/setup";
+        //TODO add error message saying that user already   
+        return "signUp";
     }
+
+    
+        
 }

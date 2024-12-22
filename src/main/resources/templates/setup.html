@@ -8,26 +8,11 @@
 </head>
 <body>
     <h6>Select subreddits you want to add to your homepage: minimum 1</h6>
-    <form method="post" th:action="@{/dashboard}" th:object="${subredditList}">
+    <form method="post" action="/setup" th:object="${user}">
         <div class="form-group">
-          <label th:for="*{sr1}">Subreddit 1</label>
-          <input type="text" class="form-control" th:field="*{sr1}" placeholder="Enter subreddit name">
-        </div>
-        <div class="form-group">
-            <label th:for="*{sr2}">Subreddit 2</label>
-            <input type="text" class="form-control" th:field="*{sr2}" placeholder="Enter subreddit name">
-        </div>
-        <div class="form-group">
-            <label th:for="*{sr3}">Subreddit 3</label>
-            <input type="text" class="form-control" th:field="*{sr3}" placeholder="Enter subreddit name">
-        </div>
-        <div class="form-group">
-            <label th:for="*{sr4}">Subreddit 4</label>
-            <input type="text" class="form-control" th:field="*{sr4}" placeholder="Enter subreddit name">
-        </div>
-        <div class="form-group">
-            <label th:for="*{sr5}">Subreddit 5</label>
-            <input type="text" class="form-control" th:field="*{sr5}" placeholder="Enter subreddit name">
+          <label th:for="*{subredditList}">Subreddits</label>
+          <div th:if="${#fields.hasErrors('subredditList')}" th:errors = "*{subredditList}" class="text-danger" ></div>
+          <input type="text" class="form-control" th:field="*{subredditList}" placeholder="Hint: you can use multiple subreddits by separating them with a + symbol." required>
         </div>
         <button type="submit" class="btn btn-primary">Let's go!</button>
       </form>

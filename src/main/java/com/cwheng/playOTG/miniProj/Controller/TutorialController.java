@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 @Controller
-@RequestMapping
+@RequestMapping("")
 public class TutorialController {
-    @GetMapping("/gettingStarted")
+    @GetMapping("/")
     public String tutorial() {
         return "gettingStarted";
     }

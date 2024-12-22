@@ -1,7 +1,7 @@
 package com.cwheng.playOTG.miniProj.Model;
 
 public class Post {
-    //user's list of 3 subreddits from the form    
+    //an individual post's data   
     private boolean ageRestricted;
     private String subredditName;
     private String postTitle;

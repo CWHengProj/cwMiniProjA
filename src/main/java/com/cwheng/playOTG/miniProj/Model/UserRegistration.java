@@ -1,10 +1,11 @@
 package com.cwheng.playOTG.miniProj.Model;
 
+import java.util.List;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-public class User {
+public class UserRegistration {
     @NotBlank(message="This is a required field.")
     @Email(message="Please enter a valid email address.")
     private String email;
@@ -12,10 +13,14 @@ public class User {
     @Size(min=5, max=128, message = "User Name must contain at least 5 characters.")
     private String userName;
     @NotBlank(message="This is a required field.")
-    @Size(min=8, max=128, message = "User Name must contain at least 8 characters.")
+    @Size(min=8, max=128, message = "Password must contain at least 8 characters.")
     private String password;
-    public User() {
+    List<String> subredditList;
+    
+    public UserRegistration() {
     }
+    
+
     public String getEmail() {
         return email;
     }
@@ -33,6 +38,12 @@ public class User {
     }
     public void setPassword(String password) {
         this.password = password;
+    }
+    public List<String> getSubredditList() {
+        return subredditList;
+    }
+    public void setSubredditList(List<String> subredditList) {
+        this.subredditList = subredditList;
     }
     
 
