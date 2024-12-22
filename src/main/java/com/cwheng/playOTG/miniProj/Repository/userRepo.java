@@ -10,7 +10,7 @@ import com.cwheng.playOTG.miniProj.Model.User;
 
 
 @Repository
-public class AccountRepo {
+public class userRepo {
     @Autowired
     @Qualifier(Constant.template01)
     RedisTemplate<String, Object> template;

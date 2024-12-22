@@ -20,7 +20,7 @@ public class RedditAPIService {
     RedditAuthenticationService ras;
 
     public ResponseEntity<String> topPosts(String subreddit, String time, Integer limit){
-        String url = String.format("https://oauth.reddit.com/r/%s/top.json?time=%s&limit=%d", subreddit, time, limit);
+        String url = String.format("https://oauth.reddit.com/r/%s/top.json?t=%s&limit=%d", subreddit, time, limit);
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization","Bearer"+ras.getToken(clientId,clientSecret));
@@ -31,10 +31,8 @@ public class RedditAPIService {
 
         ResponseEntity<String> response = restTemplate.exchange(url,HttpMethod.GET,entity,String.class);
 
-        if (response!=null){
-            return response; //TODO: RAW string, to process
-        }
+        
         return response;
-
+        //TODO: if the response is null, return message to let user know maybe API is facing issues
     }
 }

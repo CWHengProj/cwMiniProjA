@@ -4,14 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cwheng.playOTG.miniProj.Model.User;
-import com.cwheng.playOTG.miniProj.Repository.AccountRepo;
+import com.cwheng.playOTG.miniProj.Repository.userRepo;
 
 
 @Service
 public class AccountCreationService {
 
     @Autowired 
-    AccountRepo acRepo;
+    userRepo acRepo;
     public void createNewAccount(User user) {
         acRepo.createNewAccount(user);
     }

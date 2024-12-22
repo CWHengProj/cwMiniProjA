@@ -8,20 +8,20 @@
 </head>
 <body>
     <h6>Log in</h6>
-    <form method="post" th:action="@{/login}" th:object="${user}">
+    <form method="post" th:action="@{/sadkjsald}" th:object="${subreddit}">
         <div class="form-group">
-          <label th:for="*{email}">Email address</label>
+          <label for="exampleInputEmail1">Email address</label>
           <input type="text" class="form-control" th:field="*{email}" placeholder="Enter email">
         </div>
         <div class="form-group">
-          <label th:for="*{userName}"></label>User name</label>
+          <label for="exampleInputEmail1">User name</label>
           <input type="text" class="form-control" th:field="*{userName}" placeholder="Enter User Name">
         </div>
         <div class="form-group">
-          <label th:for="*{password}"></label>Password</label>
+          <label for="exampleInputPassword1">Password</label>
           <input type="password" class="form-control" th:field="*{password}" placeholder="Password">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Let's go!</button>
       </form>
       <a href="/accountCreation">Sign up</a>
 </body>

@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping("")
-public class frontPageRestController {
+public class RedditRestController {
     @Autowired
     RedditAPIService redditApiService;
     @Autowired
     RedditAuthenticationService ras;
     @GetMapping("/api/{sub}")
     public ResponseEntity<String> getTopPostsFromReddit(@PathVariable("sub") String sub) {
-
+        //subreddit choices to be appended here
         return redditApiService.topPosts(sub,Constant.timeframe,Constant.numberOfPosts);
     }
     

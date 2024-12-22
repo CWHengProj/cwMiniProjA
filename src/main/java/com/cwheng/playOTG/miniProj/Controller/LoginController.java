@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.cwheng.playOTG.miniProj.Model.User;
 import com.cwheng.playOTG.miniProj.Service.AccountCreationService;
 
@@ -14,16 +15,13 @@ import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
 
+
     
 @Controller
 @RequestMapping("")
-public class frontPageController {
+public class LoginController {
     @Autowired
     AccountCreationService acService;
-    @GetMapping("/homePage")
-    public String rulePage() {
-        return "homePage";
-    }
     @GetMapping("/accountCreation")
     public String createAccount(Model model) {
         User user = new User();
@@ -35,10 +33,9 @@ public class frontPageController {
         if (result.hasErrors()){
             return "signUp";
         }
-        acService.createNewAccount(user);
+        acService.createNewAccount(user);   
         return "login";
     }
-
     @GetMapping("/login")
     public String userLogin(Model model) {
         User user = new User();
@@ -53,21 +50,8 @@ public class frontPageController {
         }
         return "homePage";
     }
-    @GetMapping("/about")
-    public String tutorial() {
-        //TODO: general overview / marketing the application, leads user to sign up or log in
 
-        return "homePage";
-    }
-    @GetMapping("/search")
-    public String chooseSubReddits(Model model) {
-        //call the API, display the data in a table
-        //TODO: path variables so that it is configurable to a users wanted size (default 5 each)
-        //use a form to get the information
-        
-        // model.addAttribute("userSubreddits",userSubreddits);
-        return "dashBoard";
-    }
+    
     
     
         
