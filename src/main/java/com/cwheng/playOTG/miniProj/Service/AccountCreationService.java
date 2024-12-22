@@ -17,7 +17,6 @@ public class AccountCreationService {
     }
 
     public boolean correctCredentials(User user) {
-        //TODO retrieve user Info from repo, return if user exists.
         return acRepo.correctCredentials(user);
     }   
     

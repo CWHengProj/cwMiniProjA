@@ -26,15 +26,11 @@ public class AccountRepo {
         if (user==null){
             return false;
         }
-        //check if the password is correct
+        //TODO: check if the password is correct
         return true;
-        //perform a check if user exists in the database
+        //TODO: perform a check if user exists in the database
               
     }
-
-    //TODO simple encryption for the password before storing the password in the db.
-
-    //TODO to ensure user login works, make sure that the user password matches the encrypted password in the database to allow access
 
 
     

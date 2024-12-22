@@ -13,10 +13,11 @@ import com.cwheng.playOTG.miniProj.Service.AccountCreationService;
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
+
     
 @Controller
 @RequestMapping("")
-public class phoneController {
+public class frontPageController {
     @Autowired
     AccountCreationService acService;
     @GetMapping("/homePage")
@@ -50,16 +51,24 @@ public class phoneController {
         if (result.hasErrors() || !acService.correctCredentials(user)){
             return "login";
         }
-        //TODO check if valid username and password
-        return "userHome";
+        return "homePage";
     }
-    @GetMapping("/userHome")
-    public String playGame() {
-        //TODO ensure that user is logged in before they can access this page
+    @GetMapping("/about")
+    public String tutorial() {
+        //TODO: general overview / marketing the application, leads user to sign up or log in
 
-
-        return "userHome";
+        return "homePage";
     }
+    @GetMapping("/search")
+    public String chooseSubReddits(Model model) {
+        //call the API, display the data in a table
+        //TODO: path variables so that it is configurable to a users wanted size (default 5 each)
+        //use a form to get the information
+        
+        // model.addAttribute("userSubreddits",userSubreddits);
+        return "dashBoard";
+    }
+    
     
         
 }
