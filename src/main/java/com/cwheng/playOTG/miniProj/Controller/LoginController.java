@@ -8,12 +8,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cwheng.playOTG.miniProj.Model.UserRegistration;
 import com.cwheng.playOTG.miniProj.Service.AccountHandlingService;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+
 
 @Controller
 @RequestMapping("")
@@ -26,12 +27,18 @@ public class LoginController {
         return "login";
     }
     @PostMapping("/login")
-    public String postLogin(@Valid @ModelAttribute("user") UserRegistration user, BindingResult result, Model model, RedirectAttributes redirectAttributes) {
+    public String postLogin(@Valid @ModelAttribute("user") UserRegistration user, BindingResult result, Model model, HttpSession httpSession) {
         //Account validation
         if (result.hasErrors() || !ahService.correctCredentials(user)){
-            return "login";
+            return "login?error";
         }
-        redirectAttributes.addFlashAttribute("user",user);
-        return "redirect:/setup";
+        httpSession.setAttribute("user", user);
+        return "redirect:/homepage";
     }
+    @GetMapping("/logout")
+    public String logout(HttpSession httpSession) {
+        httpSession.invalidate();
+        return "redirect:/";    
+    }
+    
 }

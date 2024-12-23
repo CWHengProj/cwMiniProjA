@@ -20,6 +20,16 @@ public class UserRegistration {
     }
     
 
+    public UserRegistration(
+            @NotBlank(message = "This is a required field.") @Email(message = "Please enter a valid email address.") String email,
+            @NotBlank(message = "This is a required field.") @Size(min = 5, max = 128, message = "User Name must contain at least 5 characters.") String userName,
+            @NotBlank(message = "This is a required field.") @Size(min = 8, max = 128, message = "Password must contain at least 8 characters.") String password) {
+        this.email = email;
+        this.userName = userName;
+        this.password = password;
+    }
+
+
     public String getEmail() {
         return email;
     }

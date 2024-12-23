@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.cwheng.playOTG.miniProj.Model.Post;
 import com.cwheng.playOTG.miniProj.Service.DisplayService;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import jakarta.servlet.http.HttpSession;
 
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 @RequestMapping("")
@@ -21,23 +21,17 @@ public class HomepageController {
     @Autowired
     DisplayService displayService;
     @GetMapping("/homepage")
-    public String getMethodName(@ModelAttribute("subredditList") String [] subredditList, Model model) {
-        //iterate through the user selected subreddit lists and display them.
+    public String getMethodName(Model model,HttpSession httpSession) {
+        if (httpSession.getAttribute("user")==null){
+            return "redirect:/login";
+        }
+        String [] subredditList =(String []) httpSession.getAttribute("subredditList");
         List<List<Post>> frontPage = new ArrayList<>();
         for (String subreddit : subredditList){
             List<Post> subredditInfo=displayService.getSubredditInfoFromDB(subreddit);
-            // for(Post p: subredditInfo){
-            //     System.out.println(p.getSelfText());
-            //     System.out.println(p.getPostTitle());
-            //     System.out.println(p.getSubredditName());
-            //     System.out.println(p.getUrl());
-            //     System.out.println(p.isAgeRestricted());
-            // }
             if((subredditInfo)==null){
-                //doesnt exist in db, call new one
                 subredditInfo = displayService.getSubredditInfo(subreddit);
             }
-            //add them to the model for the view to see
             frontPage.add(subredditInfo);
         }
         model.addAttribute("frontPage", frontPage);

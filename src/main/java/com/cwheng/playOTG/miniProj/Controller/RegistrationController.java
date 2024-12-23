@@ -33,10 +33,11 @@ public class RegistrationController{
         if (result.hasErrors()){
             return "signUp";
         }
+        //TODO add error message saying that user already exists
+        
         if(acService.createNewAccount(user)){
             return "login";
         }
-        //TODO add error message saying that user already   
         return "signUp";
     }
 
