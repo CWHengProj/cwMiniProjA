@@ -37,7 +37,6 @@ public class SetupController {
         for (String subreddit: subredditList){
             //if subreddit does not already exist, call the api
             if (!displayService.checkifAlreadyCached(subreddit)){
-                System.out.println("doesnt exist in db... calling api now");
                 List<Post> subredditInfo = displayService.getSubredditInfo(subreddit);
             }
         }
