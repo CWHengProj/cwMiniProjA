@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.cwheng.playOTG.miniProj.Model.UserRegistration;
 
@@ -23,11 +24,9 @@ public class SetupController {
         return "setup";
     }
     @PostMapping("/setup")
-    public String postSetup(@ModelAttribute("user") UserRegistration user, BindingResult result) {
-        if(result.hasErrors()){
-            return "setup";
-        }
-        return "homePage";
+    public String postSetup(@ModelAttribute("user") UserRegistration user, Model model, RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("user",user);
+        return "redirect:/homepage";
     }
     
 

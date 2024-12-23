@@ -19,8 +19,6 @@ public class AccountHandlingRepo {
         //TODO password encryptions
 
         if (template.opsForHash().hasKey("LoginInfo", email)){
-            //TODO: unsafe, to change it
-
             return false;
         }
         template.opsForHash().put("LoginInfo", email, user);
