@@ -47,7 +47,6 @@ public class RedditAPIService {
         JsonReader jReader = Json.createReader(new StringReader(rawData));
         JsonObject jObject = jReader.readObject();
         JsonArray jArray = jObject.getJsonObject("data").getJsonArray("children");
-        //TODO separate multiple requests for multiple subreddits
         for (int i=0; i<jArray.size(); i++){
             boolean ageRestricted =jArray.get(i).asJsonObject().getJsonObject("data").getBoolean("over_18");
             String subredditName =jArray.get(i).asJsonObject().getJsonObject("data").getString("subreddit");
@@ -55,12 +54,11 @@ public class RedditAPIService {
             String selfText =jArray.get(i).asJsonObject().getJsonObject("data").getString("selftext");
             String postUrl =jArray.get(i).asJsonObject().getJsonObject("data").getString("url");
             Post post = new Post(ageRestricted,subredditName,postTitle,selfText,postUrl);
-            subredditContent.add(post);
+            if (ageRestricted==false){
+                subredditContent.add(post);
+            }
         }
-        //TODO add sfw posts to the database to extract out when needed
         srRepo.addtoDB(subreddit,subredditContent);
-        
         return subredditContent;
-        //TODO: if the response is null, return message to let user know maybe API is facing issues
     }
 }

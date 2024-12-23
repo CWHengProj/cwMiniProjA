@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -35,9 +34,12 @@ public class SetupController {
     public String postSetup(@ModelAttribute("user") UserRegistration user, RedirectAttributes redirectAttributes) {
         String[] subredditList = user.getUserSubreddits().split(",");
         //call the internal api (localhost) and perform an exchange
-        //don't really need this, leave it as an open end in case
         for (String subreddit: subredditList){
-            List<Post> subredditInfo = displayService.getSubredditInfo(subreddit);
+            //if subreddit does not already exist, call the api
+            if (!displayService.checkifAlreadyCached(subreddit)){
+                System.out.println("doesnt exist in db... calling api now");
+                List<Post> subredditInfo = displayService.getSubredditInfo(subreddit);
+            }
         }
         redirectAttributes.addFlashAttribute("subredditList",subredditList);
         return "redirect:/homepage";
