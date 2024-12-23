@@ -8,6 +8,8 @@
 </head>
 <body>
     <h6>Home Page</h6>
-    <a th:text="${user.userSubreddits}"></a>
+    <tr th:each="subreddit: ${subredditList}">
+        <td th:text="${subreddit}"></td>
+    </tr>
 </body>
 </html>
