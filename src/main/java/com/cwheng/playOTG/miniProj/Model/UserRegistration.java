@@ -16,7 +16,7 @@ public class UserRegistration {
     private String password;
     private String[] userSubreddits;
     private String rawSubreddits;
-
+    private Integer postsToShow;
     public UserRegistration() {
     }
     
@@ -68,6 +68,16 @@ public class UserRegistration {
 
     public void setRawSubreddits(String rawSubreddits) {
         this.rawSubreddits = rawSubreddits;
+    }
+
+
+    public Integer getPostsToShow() {
+        return postsToShow;
+    }
+
+
+    public void setPostsToShow(Integer postsToShow) {
+        this.postsToShow = postsToShow;
     }
 
 

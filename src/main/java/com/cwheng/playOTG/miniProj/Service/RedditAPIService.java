@@ -39,11 +39,8 @@ public class RedditAPIService {
         headers.set("Authorization","Bearer"+ras.getToken(clientId,clientSecret));
         headers.set("Accept","application/json");
 
-        // HttpEntity<String> entity = new HttpEntity<>(headers);
-        // ResponseEntity<String> response = restTemplate.exchange(url,HttpMethod.GET,entity,String.class);
         List<Post> subredditContent = new ArrayList<>();
         String rawData = restTemplate.getForObject(url, String.class);
-        //perform the data processing
         JsonReader jReader = Json.createReader(new StringReader(rawData));
         JsonObject jObject = jReader.readObject();
         JsonArray jArray = jObject.getJsonObject("data").getJsonArray("children");

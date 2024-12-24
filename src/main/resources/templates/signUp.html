@@ -26,6 +26,9 @@
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
+      <div th:if="${error}">
+        <p th:text="${error}" style="color: red;"></p>
+      </div>
       <a href="/login">Login</a>
 
 </body>

@@ -25,11 +25,9 @@ public class AccountHandlingRepo {
         UserRegistration encryptedUser = new UserRegistration(email,username,encryptedPassword);
 
         if (template.opsForHash().hasKey("LoginInfo", email)){
-            //TODO: email already in use
             return false;
         }
         template.opsForHash().put("LoginInfo", email, encryptedUser);
-        //TODO: success! sending over to log in
         return true;
 
     }
@@ -38,9 +36,7 @@ public class AccountHandlingRepo {
         String username = user.getUserName();
         String password = user.getPassword();
         String email = user.getEmail();
-        System.out.printf("%s ,%s ,%s\n",username,password,email);
         if(template.opsForHash().get("LoginInfo", email)==null){
-            //TODO: display user does not exist, did you mean to sign up?
             return false;
         }
         UserRegistration dbUser = (UserRegistration) template.opsForHash().get("LoginInfo", email);
@@ -48,18 +44,17 @@ public class AccountHandlingRepo {
         String p = dbUser.getPassword();
         String encryptedPassword = org.springframework.data.redis.core.script.DigestUtils.sha1DigestAsHex(password);
         if (username.equals(u) && encryptedPassword.equals(p)){
-            //TODO: pop up success! send to Homepage
             return true;
         }
-        //TODO: wrong username or password
         return false;
 
     }
 
     public UserRegistration updateAccount(UserRegistration user) {
-        //TODO check if updated value loses encrypted password
-        //TODO email is null here which is odd
         String email = user.getEmail();
+        String rawPassword = user.getPassword();
+        String encryptedPassword = org.springframework.data.redis.core.script.DigestUtils.sha1DigestAsHex(rawPassword);
+        user.setPassword(encryptedPassword);
         template.opsForHash().put("LoginInfo",email,user);
         return (UserRegistration) template.opsForHash().get("LoginInfo", email);
     }

@@ -1,5 +1,6 @@
 package com.cwheng.playOTG.miniProj.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +20,18 @@ public class DisplayService {
     SubRedditRepo subRedditRepo;
     RestTemplate restTemplate = new RestTemplate();
     public List<Post> getSubredditInfo(String subreddit) {
-        //make the exchange with local api
         ResponseEntity<List<Post>> subredditInfo = restTemplate.exchange((Constant.localUrl+subreddit), HttpMethod.GET, null, new ParameterizedTypeReference<List<Post>>() {});
         return subredditInfo.getBody();
 
     }
-    public List<Post> getSubredditInfoFromDB(String subreddit) {
-        return subRedditRepo.getSubredditInfo(subreddit); 
+    public List<Post> getSubredditInfoFromDB(String subreddit,Integer posts) {
+        List<Post> fullSubreddit = subRedditRepo.getSubredditInfo(subreddit);
+        List<Post> userCustomizedSubreddit = new ArrayList<>();
+        for (int i=0; i<posts; i++){
+            userCustomizedSubreddit.add(fullSubreddit.get(i));
+        }
+        return userCustomizedSubreddit;
+
     }
     public boolean checkifAlreadyCached(String subreddit) {
         return subRedditRepo.checkifAlreadyCached(subreddit);

@@ -1,6 +1,7 @@
 package com.cwheng.playOTG.miniProj.Repository;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,13 +16,14 @@ public class SubRedditRepo {
 
     @Autowired
     @Qualifier(Constant.template01)
+    //TODO: expire the subreddit info after x amount of time
     RedisTemplate<String, Object> template;
     public void addtoDB(String subreddit, List<Post> subredditContent) {
         template.opsForHash().put("redditPosts", subreddit, subredditContent);
+        template.expire("redditPosts",Constant.expiryTimeinSeconds,TimeUnit.SECONDS);
     }
 
     
-    //TODO save resources, update the db if the last time it was called was more than a day ago
     public List<Post> getSubredditInfo(String subreddit) {
         List<Post> userFrontPage= (List<Post>) template.opsForHash().get("redditPosts", subreddit);
         return userFrontPage;
