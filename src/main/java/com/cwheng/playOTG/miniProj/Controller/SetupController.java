@@ -40,7 +40,7 @@ public class SetupController {
         String[] subredditList = user.getRawSubreddits().split(",");
         for (String subreddit: subredditList){
             if (!displayService.checkifAlreadyCached(subreddit)){
-                displayService.getSubredditInfo(subreddit);
+                displayService.getSubredditInfoFromAPI(subreddit);
             }
         }
         Integer posts = user.getPostsToShow();

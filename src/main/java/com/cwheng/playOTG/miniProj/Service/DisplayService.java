@@ -19,13 +19,16 @@ public class DisplayService {
     @Autowired
     SubRedditRepo subRedditRepo;
     RestTemplate restTemplate = new RestTemplate();
-    public List<Post> getSubredditInfo(String subreddit) {
+    public List<Post> getSubredditInfoFromAPI(String subreddit) {
         ResponseEntity<List<Post>> subredditInfo = restTemplate.exchange((Constant.localUrl+subreddit), HttpMethod.GET, null, new ParameterizedTypeReference<List<Post>>() {});
         return subredditInfo.getBody();
 
     }
     public List<Post> getSubredditInfoFromDB(String subreddit,Integer posts) {
         List<Post> fullSubreddit = subRedditRepo.getSubredditInfo(subreddit);
+        if (fullSubreddit==null){
+            return null;
+        }
         List<Post> userCustomizedSubreddit = new ArrayList<>();
         for (int i=0; i<posts; i++){
             userCustomizedSubreddit.add(fullSubreddit.get(i));

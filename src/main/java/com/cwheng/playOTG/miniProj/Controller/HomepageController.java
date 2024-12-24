@@ -27,7 +27,6 @@ public class HomepageController {
     AccountHandlingService acService;
     @GetMapping("/homepage")
     public String getMethodName(@RequestParam(value="postsPerSubreddit",required =false) Integer posts,Model model,HttpSession httpSession) {
-        //by default, use the value in their setup. user can also change the number here in the address bar
         if (httpSession.getAttribute("user")==null){
             return "redirect:/login?error="+ErrorMessages.ACCESS_DENIED;
         }
@@ -43,7 +42,7 @@ public class HomepageController {
         for (String subreddit : subredditList){
             List<Post> subredditInfo=displayService.getSubredditInfoFromDB(subreddit,posts);
             if((subredditInfo)==null){
-                subredditInfo = displayService.getSubredditInfo(subreddit);
+                subredditInfo = displayService.getSubredditInfoFromAPI(subreddit);
             }
             frontPage.add(subredditInfo);
         }
