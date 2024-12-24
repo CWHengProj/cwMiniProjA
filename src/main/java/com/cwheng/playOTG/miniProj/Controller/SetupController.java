@@ -38,12 +38,12 @@ public class SetupController {
     @PostMapping("/setup")
     public String postSetup(@ModelAttribute("user") UserRegistration user, HttpSession httpSession) {
         String[] subredditList = user.getRawSubreddits().split(",");
+        Integer posts = user.getPostsToShow();
         for (String subreddit: subredditList){
             if (!displayService.checkifAlreadyCached(subreddit)){
-                displayService.getSubredditInfoFromAPI(subreddit);
+                displayService.getSubredditInfoFromAPI(subreddit,posts);
             }
         }
-        Integer posts = user.getPostsToShow();
         UserRegistration updatedUser = (UserRegistration) httpSession.getAttribute("user");
         updatedUser.setUserSubreddits(subredditList);
         updatedUser.setPostsToShow(posts);

@@ -19,8 +19,10 @@ public class SubRedditRepo {
     RedisTemplate<String, Object> template;
     public void addtoDB(String subreddit, List<Post> subredditContent) {
         template.opsForHash().put(subreddit, subreddit, subredditContent);
-        // template.expire(subreddit,Constant.expiryTimeinSeconds,TimeUnit.SECONDS);
-        template.expire(subreddit,Constant.expiryTimeinDays,TimeUnit.DAYS);
+        //TODO: for cache testing
+        template.expire(subreddit,Constant.expiryTimeinSeconds,TimeUnit.SECONDS);
+        // template.expire(subreddit,Constant.expiryTimeinDays,TimeUnit.DAYS);
+        
     }
 
     
@@ -31,7 +33,7 @@ public class SubRedditRepo {
 
 
     public boolean checkifAlreadyCached(String subreddit) {
-        return template.opsForHash().hasKey("redditPosts",subreddit);
+        return template.opsForHash().hasKey(subreddit,subreddit);
     }
     
 }
