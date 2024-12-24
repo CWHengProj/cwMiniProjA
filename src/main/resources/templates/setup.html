@@ -11,8 +11,8 @@
     <a href="/logout">Log out</a>
     <form method="post" action="/setup" th:object="${user}">
         <div class="form-group">
-          <label th:for="*{userSubreddits}">Subreddits</label>
-          <input type="text" class="form-control" th:field="*{userSubreddits}" placeholder="Hint: you can use multiple subreddits by separating them with a , symbol." required>
+          <label th:for="*{rawSubreddits}">Subreddits</label>
+          <input type="text" class="form-control" th:field="*{rawSubreddits}" placeholder="Hint: you can use multiple subreddits by separating them with a , symbol." required>
         </div>
         <button type="submit" class="btn btn-primary">Let's go!</button>
       </form>

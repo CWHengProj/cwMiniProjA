@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 import com.cwheng.playOTG.miniProj.Constant.Constant;
 import com.cwheng.playOTG.miniProj.Model.UserRegistration;
 
+import jakarta.servlet.http.HttpSession;
+
 
 @Repository
 public class AccountHandlingRepo {
@@ -52,6 +54,20 @@ public class AccountHandlingRepo {
         //TODO: wrong username or password
         return false;
 
+    }
+
+    public UserRegistration updateAccount(UserRegistration user) {
+        //TODO check if updated value loses encrypted password
+        //TODO email is null here which is odd
+        String email = user.getEmail();
+        template.opsForHash().put("LoginInfo",email,user);
+        return (UserRegistration) template.opsForHash().get("LoginInfo", email);
+    }
+
+    public UserRegistration getUser(HttpSession httpSession) {
+        UserRegistration user = (UserRegistration) httpSession.getAttribute("user");
+        String email = user.getEmail();
+        return (UserRegistration) template.opsForHash().get("LoginInfo", email);
     }
 
 

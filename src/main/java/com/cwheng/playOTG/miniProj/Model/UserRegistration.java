@@ -14,7 +14,8 @@ public class UserRegistration {
     @NotBlank(message="This is a required field.")
     @Size(min=8, max=128, message = "Password must contain at least 8 characters.")
     private String password;
-    private String userSubreddits;
+    private String[] userSubreddits;
+    private String rawSubreddits;
 
     public UserRegistration() {
     }
@@ -50,14 +51,27 @@ public class UserRegistration {
     }
 
 
-    public String getUserSubreddits() {
+    public String[] getUserSubreddits() {
         return userSubreddits;
     }
 
 
-    public void setUserSubreddits(String userSubreddits) {
+    public void setUserSubreddits(String[] userSubreddits) {
         this.userSubreddits = userSubreddits;
     }
+
+
+    public String getRawSubreddits() {
+        return rawSubreddits;
+    }
+
+
+    public void setRawSubreddits(String rawSubreddits) {
+        this.rawSubreddits = rawSubreddits;
+    }
+
+
+
     
 
 }
