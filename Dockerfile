@@ -7,12 +7,13 @@ WORKDIR ${APP_DIR}
 
 # Copy project files into the image
 COPY pom.xml .
-COPY mvnw.cmd .
+# COPY mvnw.cmd .
+# COPY mvnw .
 COPY .mvn .mvn
 COPY src src
 
 # # Ensure the mvnw script has execution permissions
-# RUN chmod +x mvnw.cmd
+# RUN chmod +x mvnw
 # Build the application; might have to use mvn instead of /mvnw
 RUN mvn clean package -Dmaven.test.skip=true 
 
@@ -27,7 +28,7 @@ WORKDIR ${DEPLOY_DIR}
 COPY --from=compiler /app/target/miniProj-0.0.1-SNAPSHOT.jar ssfMiniProj.jar
 
 # Set the server port
-ENV SERVER_PORT=3000
+ENV SERVER_PORT=4000
 
 # Expose the port
 EXPOSE ${SERVER_PORT}
