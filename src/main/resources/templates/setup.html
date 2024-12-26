@@ -12,7 +12,7 @@
     <form method="post" action="/setup" th:object="${user}">
         <div class="form-group">
           <label th:for="*{rawSubreddits}">Subreddits</label>
-          <input type="text" class="form-control" th:field="*{rawSubreddits}" placeholder="Hint: you can use multiple subreddits by separating them with a , symbol." required>
+          <input type="text" class="form-control" th:field="*{rawSubreddits}" placeholder="Hint: you can use multiple subreddits by separating them with a + symbol." required>
           <p>Number of posts to show per category chosen</p>
           <input type="number" th:field="*{postsToShow}" min="1" max="10" required >
         </div>

@@ -29,7 +29,7 @@ public class SetupController {
     @GetMapping("/setup")
     public String chooseSubReddits(Model model, HttpSession httpSession) {
         if (httpSession.getAttribute("user")==null){
-            return "redirect:/login?error="+ErrorMessages.INVALID_CREDENTIALS;
+            return "redirect:/login?error="+ErrorMessages.ACCESS_DENIED;
         }
         UserRegistration user = (UserRegistration) httpSession.getAttribute("user");
         model.addAttribute("user",user);
@@ -37,7 +37,8 @@ public class SetupController {
     }
     @PostMapping("/setup")
     public String postSetup(@ModelAttribute("user") UserRegistration user, HttpSession httpSession) {
-        String[] subredditList = user.getRawSubreddits().split(",");
+        String rawSubreddits = user.getRawSubreddits();
+        String[] subredditList = rawSubreddits.replace("+", ",").split(",");
         Integer posts = user.getPostsToShow();
         for (String subreddit: subredditList){
             if (!displayService.checkifAlreadyCached(subreddit)){
@@ -45,12 +46,13 @@ public class SetupController {
             }
         }
         UserRegistration updatedUser = (UserRegistration) httpSession.getAttribute("user");
+        updatedUser.setRawSubreddits(rawSubreddits);
         updatedUser.setUserSubreddits(subredditList);
         updatedUser.setPostsToShow(posts);
         updatedUser = acService.updateUser(updatedUser);
         httpSession.setAttribute("user", updatedUser);
         String postStr = posts.toString();
-        return "redirect:/homepage?postsPerSubreddit="+postStr;
+        return "redirect:/homepage/"+rawSubreddits+"?postsPerSubreddit="+postStr;
     }
 
 }

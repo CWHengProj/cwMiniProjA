@@ -42,7 +42,8 @@ public class LoginController {
             return "redirect:/login?error="+ErrorMessages.INVALID_CREDENTIALS;
         }
         httpSession.setAttribute("user", user);
-        return "redirect:/homepage";
+        String userSubs = user.getRawSubreddits();
+        return "redirect:/homepage/"+userSubs;
     }
     @GetMapping("/logout")
     public String logout(HttpSession httpSession) {
