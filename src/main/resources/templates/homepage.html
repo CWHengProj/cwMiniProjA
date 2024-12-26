@@ -4,41 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" 
-          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
-        .subreddit-container {
-            max-height: 70vh; /* Limit height for scrolling */
-            overflow-y: auto; /* Add vertical scroll */
-            padding: 1rem;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        .subreddit-title {
-            color: #007bff;
-        }
-        .post-card {
-            margin-bottom: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        .card-header {
-            background-color: #f1f1f1;
-            font-weight: bold;
-        }
-    </style>
 </head>
 <body>
     <a href="/logout">Log out</a>
     <a href="/setup">Configure subreddits</a>
 
     <div class="container mt-5">
-        <h1 class="text-center mb-4">Your Front Page</h1>
+        <h1 class="text-center mb-4">Front page</h1>
         <!-- Outer scrollable container -->
         <div class="subreddit-container">
             <!-- Loop through each subreddit -->
@@ -62,8 +34,5 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" 
-            integrity="sha384-qjQ7i6fHKtxIoIcAAYmrhHfprzwn0nMlgShcgc1D7EJp3y8ujfAR8r/u7Wrxa6nB" 
-            crossorigin="anonymous"></script>
 </body>
 </html>
