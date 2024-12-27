@@ -47,7 +47,6 @@ public class SetupController {
             }
         }
         UserRegistration updatedUser = (UserRegistration) httpSession.getAttribute("user");
-        //TODO: probably issue is here
         updatedUser.setRawSubreddits(rawSubreddits);
         updatedUser.setUserSubreddits(subredditList);
         updatedUser.setPostsToShow(posts);
