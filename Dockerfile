@@ -1,19 +1,14 @@
 # Use the Maven image as the base
 FROM maven:3.9.9-eclipse-temurin-23 AS compiler
-#FROM openjdk:23-jdk-oracle 
+
 # Define application directory
 ARG APP_DIR=/app 
 WORKDIR ${APP_DIR}
 
 # Copy project files into the image
 COPY pom.xml .
-# COPY mvnw.cmd .
-# COPY mvnw .
-COPY .mvn .mvn
 COPY src src
 
-# # Ensure the mvnw script has execution permissions
-# RUN chmod +x mvnw
 # Build the application; might have to use mvn instead of /mvnw
 RUN mvn clean package -Dmaven.test.skip=true 
 

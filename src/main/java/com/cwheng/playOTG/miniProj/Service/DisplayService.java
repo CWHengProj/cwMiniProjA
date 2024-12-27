@@ -28,11 +28,12 @@ public class DisplayService {
         }
         return userCustomizedSubreddit;
     }
-    public List<Post> getSubredditInfoFromDB(String subreddit,Integer posts) {
+    public List<Post>getSubredditInfoFromDB(String subreddit,Integer posts) {
         List<Post> fullSubreddit = subRedditRepo.getSubredditInfo(subreddit);
         if (fullSubreddit==null){
             return null;
         }
+        posts = Math.min(posts, fullSubreddit.size()); //edge case handling in case the subreddit has less posts than requested
         List<Post> userCustomizedSubreddit = new ArrayList<>();
         for (int i=0; i<posts; i++){
             userCustomizedSubreddit.add(fullSubreddit.get(i));

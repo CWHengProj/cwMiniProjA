@@ -27,7 +27,7 @@ public class RedditRestController {
     @GetMapping("/api/{sub}")
     public ResponseEntity<List<Post>> getTopPostsFromReddit(@PathVariable("sub") String sub) {
 
-        //subreddit choices to be appended hereb
+        //subreddit choices to be appended here
         List<Post> subredditContent = redditApiService.topPosts(sub,Constant.timeframe,Constant.numberOfPosts);
         return ResponseEntity.ok().body(subredditContent);
     }

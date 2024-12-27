@@ -29,7 +29,7 @@ public class HomepageController {
     @GetMapping("/homepage/{categories}")
     public String getMethodName(@PathVariable(name= "categories", required=false) String categories,@RequestParam(value="postsPerSubreddit",required =false) Integer posts,Model model,HttpSession httpSession) {
         if (httpSession.getAttribute("user")==null){
-            return "redirect:/login?error="+ErrorMessages.ACCESS_DENIED;
+            return "redirect:/login?error="+ErrorTochange.ACCESS_DENIED;
         }
         //gets the info from db using the session email address
         UserRegistration userDb = acService.getUser(httpSession);
@@ -42,10 +42,10 @@ public class HomepageController {
         if(subredditList==null){
             return "redirect:/setup";
         }
-
         if (posts==null){
             posts = userDb.getPostsToShow();
         }
+        posts = Math.min(10, posts);
         List<List<Post>> frontPage = new ArrayList<>();
         //limit the information received here to prevent any api call abuse
         int limit = 5;

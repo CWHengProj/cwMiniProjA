@@ -29,7 +29,7 @@ public class SetupController {
     @GetMapping("/setup")
     public String chooseSubReddits(Model model, HttpSession httpSession) {
         if (httpSession.getAttribute("user")==null){
-            return "redirect:/login?error="+ErrorMessages.ACCESS_DENIED;
+            return "redirect:/login?error="+ErrorTochange.ACCESS_DENIED;
         }
         UserRegistration user = (UserRegistration) httpSession.getAttribute("user");
         model.addAttribute("user",user);

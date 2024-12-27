@@ -41,7 +41,7 @@ public class RedditAPIService {
 
         List<Post> subredditContent = new ArrayList<>();
         String rawData = restTemplate.getForObject(url, String.class);
-        JsonReader jReader = Json.createReader(new StringReader(rawData));
+        JsonReader jReader = Json.createReader(new StringReader(rawData));  
         JsonObject jObject = jReader.readObject();
         JsonArray jArray = jObject.getJsonObject("data").getJsonArray("children");
         for (int i=0; i<jArray.size(); i++){
