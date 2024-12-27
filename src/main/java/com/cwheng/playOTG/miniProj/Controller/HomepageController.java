@@ -33,21 +33,28 @@ public class HomepageController {
         }
         //gets the info from db using the session email address
         UserRegistration userDb = acService.getUser(httpSession);
+        //check if there are saved subreddits
         //checks the users subreddit list from their profile
-        System.out.println(categories);
         if (categories.equals("null")){
             return "redirect:/setup";
         }
+        System.out.println(posts);
         if (posts==null){
             posts = userDb.getPostsToShow();
         }
         String [] subredditList = categories.replace("+", ",").split(",");
         List<List<Post>> frontPage = new ArrayList<>();
+        //limit the information received here to prevent any api call abuse
+        int limit = 5;
+        int i =0;
         //iterate through their string array to get each subreddit
-        for (String subreddit : subredditList){            
+        for (String subreddit : subredditList){
+            i++;
+            if (i>limit){
+                break;
+            }
             List<Post> subredditInfo=displayService.getSubredditInfoFromDB(subreddit,posts);
             if((subredditInfo)==null){
-                System.out.println("aw snap, no cache! calling api now..");
                 subredditInfo = displayService.getSubredditInfoFromAPI(subreddit,posts);
             }
             frontPage.add(subredditInfo);

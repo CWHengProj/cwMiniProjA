@@ -41,11 +41,13 @@ public class SetupController {
         String[] subredditList = rawSubreddits.replace("+", ",").split(",");
         Integer posts = user.getPostsToShow();
         for (String subreddit: subredditList){
+
             if (!displayService.checkifAlreadyCached(subreddit)){
                 displayService.getSubredditInfoFromAPI(subreddit,posts);
             }
         }
         UserRegistration updatedUser = (UserRegistration) httpSession.getAttribute("user");
+        //TODO: probably issue is here
         updatedUser.setRawSubreddits(rawSubreddits);
         updatedUser.setUserSubreddits(subredditList);
         updatedUser.setPostsToShow(posts);
