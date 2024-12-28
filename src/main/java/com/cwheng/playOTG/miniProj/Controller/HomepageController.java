@@ -27,7 +27,7 @@ public class HomepageController {
     @Autowired
     AccountHandlingService acService;
     @GetMapping("/homepage/{categories}")
-    public String getMethodName(@PathVariable(name= "categories", required=false) String categories,@RequestParam(value="postsPerSubreddit",required =false) Integer posts,Model model,HttpSession httpSession) {
+    public String getPosts(@PathVariable(name= "categories", required=false) String categories,@RequestParam(value="postsPerSubreddit",required =false) Integer posts,Model model,HttpSession httpSession) {
         if (httpSession.getAttribute("user")==null){
             return "redirect:/login?error="+ErrorTochange.ACCESS_DENIED;
         }

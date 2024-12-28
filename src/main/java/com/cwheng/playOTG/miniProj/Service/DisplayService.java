@@ -22,6 +22,7 @@ public class DisplayService {
     public List<Post> getSubredditInfoFromAPI(String subreddit, Integer posts) {
         ResponseEntity<List<Post>> subredditInfo = restTemplate.exchange((Constant.localUrl+subreddit), HttpMethod.GET, null, new ParameterizedTypeReference<List<Post>>() {});
         List<Post> fullSubreddit = subredditInfo.getBody();
+        posts = Math.min(posts, fullSubreddit.size()); //edge case handling in case the subreddit has less posts than requested
         List<Post> userCustomizedSubreddit = new ArrayList<>();
         for (int i=0; i<posts; i++){
             userCustomizedSubreddit.add(fullSubreddit.get(i));
