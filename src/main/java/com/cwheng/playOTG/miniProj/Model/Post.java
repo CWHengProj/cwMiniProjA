@@ -7,17 +7,18 @@ public class Post {
     private String postTitle;
     private String selfText;    
     private String url;
-    // private String imageLink; //should get from the same variable from images
+    private String contentType;
     public Post() {
     }
-    public Post(boolean ageRestricted, String subredditName, String postTitle, String selfText, String url) {
+    public Post(boolean ageRestricted, String subredditName, String postTitle, String selfText, String url, String contentType) {
         this.ageRestricted = ageRestricted;
         this.subredditName = subredditName;
         this.postTitle = postTitle;
         this.selfText = selfText;
         this.url = url;
-        // this.imageLink = imageLink;
+        this.contentType = contentType;
     }
+    
     public boolean isAgeRestricted() {
         return ageRestricted;
     }
@@ -48,12 +49,11 @@ public class Post {
     public void setUrl(String url) {
         this.url = url;
     }
-    // public String getImageLink() {
-    //     return imageLink;
-    // }
-    // public void setImageLink(String imageLink) {
-    //     this.imageLink = imageLink;
-    // }
-    
+    public String getContentType() {
+        return contentType;
+    }
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
 
 }

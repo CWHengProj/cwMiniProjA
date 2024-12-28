@@ -32,6 +32,8 @@ public class RedditAPIService {
     RedditAuthenticationService ras;
     @Autowired
     SubRedditRepo srRepo;
+    @Autowired
+    ContentTypeService ctService;
     public List<Post> topPosts(String subreddit, String time, Integer limit){
         String url = String.format("https://oauth.reddit.com/r/%s/top.json?t=%s&limit=%d", subreddit, time, limit);
 
@@ -50,7 +52,8 @@ public class RedditAPIService {
             String postTitle =jArray.get(i).asJsonObject().getJsonObject("data").getString("title");
             String selfText =jArray.get(i).asJsonObject().getJsonObject("data").getString("selftext");
             String postUrl =jArray.get(i).asJsonObject().getJsonObject("data").getString("url");
-            Post post = new Post(ageRestricted,subredditName,postTitle,selfText,postUrl);
+            String contentType = ctService.determineContent(postUrl);
+            Post post = new Post(ageRestricted,subredditName,postTitle,selfText,postUrl,contentType);
             if (ageRestricted==false){
                 subredditContent.add(post);
             }

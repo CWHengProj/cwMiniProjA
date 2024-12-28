@@ -24,6 +24,7 @@ public class AccountHandlingRepo {
         String encryptedPassword = org.springframework.data.redis.core.script.DigestUtils.sha1DigestAsHex(rawPassword);
         UserRegistration encryptedUser = new UserRegistration(email,username,encryptedPassword);
 
+
         if (template.opsForHash().hasKey("LoginInfo", email)){
             return false;
         }
@@ -36,6 +37,7 @@ public class AccountHandlingRepo {
         String username = user.getUserName();
         String password = user.getPassword();
         String email = user.getEmail();
+
         if(template.opsForHash().get("LoginInfo", email)==null){
             return false;
         }
@@ -43,6 +45,7 @@ public class AccountHandlingRepo {
         String u = dbUser.getUserName();
         String p = dbUser.getPassword();
         String encryptedPassword = org.springframework.data.redis.core.script.DigestUtils.sha1DigestAsHex(password);
+
         if (username.equals(u) && encryptedPassword.equals(p)){
             return true;
         }
@@ -52,9 +55,6 @@ public class AccountHandlingRepo {
 
     public UserRegistration updateAccount(UserRegistration user) {
         String email = user.getEmail();
-        String rawPassword = user.getPassword();
-        String encryptedPassword = org.springframework.data.redis.core.script.DigestUtils.sha1DigestAsHex(rawPassword);
-        user.setPassword(encryptedPassword);
         template.opsForHash().put("LoginInfo",email,user);
         return (UserRegistration) template.opsForHash().get("LoginInfo", email);
     }

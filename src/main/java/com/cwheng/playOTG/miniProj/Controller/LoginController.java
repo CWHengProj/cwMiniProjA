@@ -29,7 +29,7 @@ public class LoginController {
     @GetMapping("/login")
     public String userLogin(@RequestParam(value="error",required=false) Error error,@ModelAttribute("user") UserRegistration user, Model model) {
         if (error!=null){
-            String errorMessage = messageSource.getMessage("error."+error,null, null);
+            String errorMessage = messageSource.getMessage("error."+error.toString(),null, null);
             model.addAttribute("error",errorMessage);
         }
         model.addAttribute("user",user);
@@ -41,6 +41,9 @@ public class LoginController {
         if (result.hasErrors() || !ahService.correctCredentials(user)){
             return "redirect:/login?error="+Error.INVALID_CREDENTIALS;
         }
+        String password= user.getPassword();
+        String encryptedPassword = org.springframework.data.redis.core.script.DigestUtils.sha1DigestAsHex(password);
+        user.setPassword(encryptedPassword);
         httpSession.setAttribute("user", user);
         String userSubs = user.getRawSubreddits();
         return "redirect:/homepage/"+userSubs;

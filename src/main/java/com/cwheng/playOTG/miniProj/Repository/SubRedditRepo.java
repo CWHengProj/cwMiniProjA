@@ -19,7 +19,6 @@ public class SubRedditRepo {
     RedisTemplate<String, Object> template;
     public void addtoDB(String subreddit, List<Post> subredditContent) {
         template.opsForHash().put(subreddit, subreddit, subredditContent);
-        //TODO: for cache testing
         // template.expire(subreddit,Constant.expiryTimeinSeconds,TimeUnit.SECONDS);
         template.expire(subreddit,Constant.expiryTimeinDays,TimeUnit.DAYS);
         
