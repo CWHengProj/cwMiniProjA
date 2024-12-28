@@ -27,7 +27,7 @@ public class LoginController {
     MessageSource messageSource;
 
     @GetMapping("/login")
-    public String userLogin(@RequestParam(value="error",required=false) ErrorTochange error,@ModelAttribute("user") UserRegistration user, Model model) {
+    public String userLogin(@RequestParam(value="error",required=false) Error error,@ModelAttribute("user") UserRegistration user, Model model) {
         if (error!=null){
             String errorMessage = messageSource.getMessage("error."+error,null, null);
             model.addAttribute("error",errorMessage);
@@ -39,7 +39,7 @@ public class LoginController {
     public String postLogin(@Valid @ModelAttribute("user") UserRegistration user, BindingResult result, Model model, HttpSession httpSession) {
         //Account validation
         if (result.hasErrors() || !ahService.correctCredentials(user)){
-            return "redirect:/login?error="+ErrorTochange.INVALID_CREDENTIALS;
+            return "redirect:/login?error="+Error.INVALID_CREDENTIALS;
         }
         httpSession.setAttribute("user", user);
         String userSubs = user.getRawSubreddits();

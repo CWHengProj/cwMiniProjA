@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+</head>
+<body>
+    <a href="/logout">Log out</a>
+    <a href="/setup">Configure subreddits</a>
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Front page</h1>
+        <!-- Outer scrollable container -->
+        <div class="subreddit-container">
+            <!-- Loop through each subreddit -->
+            <div th:each="subredditInfo : ${frontPage}">
+                <!-- Display subreddit title -->
+                <h2 class="subreddit-title" th:text="${#lists.isEmpty(subredditInfo) ? 'Unknown Subreddit' : subredditInfo[0].subredditName}">
+                    Subreddit Name
+                </h2>
+
+                <!-- Loop through posts in the subreddit -->
+                <div th:each="post : ${subredditInfo}" class="post-card card">
+                    <div class="card-header">
+                        <span th:text="${post.postTitle}">Post Title</span>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text" th:text="${post.selfText}">Post Description</p>
+                        <a th:href="${post.url}" target="_blank" class="btn btn-primary">View Post</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

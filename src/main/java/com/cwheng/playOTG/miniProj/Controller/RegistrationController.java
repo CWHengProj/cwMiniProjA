@@ -27,7 +27,7 @@ public class RegistrationController{
     @Autowired
     MessageSource messageSource;
     @GetMapping("/accountCreation")
-    public String createNewAccount(@RequestParam(value="error",required=false) ErrorTochange error,Model model) {
+    public String createNewAccount(@RequestParam(value="error",required=false) Error error,Model model) {
         if (error!=null){
             String errorMessage = messageSource.getMessage("error."+error,null, null);
             model.addAttribute("error",errorMessage);
@@ -44,7 +44,7 @@ public class RegistrationController{
         if(acService.createNewAccount(user)){
             return "login";
         }
-        return "redirect:/accountCreation?error="+ErrorTochange.EXISTING_ACCOUNT;
+        return "redirect:/accountCreation?error="+Error.EXISTING_ACCOUNT;
     }
 
     

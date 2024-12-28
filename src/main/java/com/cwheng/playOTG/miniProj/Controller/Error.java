@@ -1,6 +1,6 @@
 package com.cwheng.playOTG.miniProj.Controller;
 
-public enum ErrorTochange {
+public enum Error {
     SESSION_EXPIRED,
     ACCESS_DENIED,
     INVALID_CREDENTIALS,

@@ -29,7 +29,7 @@ public class HomepageController {
     @GetMapping("/homepage/{categories}")
     public String getPosts(@PathVariable(name= "categories", required=false) String categories,@RequestParam(value="postsPerSubreddit",required =false) Integer posts,Model model,HttpSession httpSession) {
         if (httpSession.getAttribute("user")==null){
-            return "redirect:/login?error="+ErrorTochange.ACCESS_DENIED;
+            return "redirect:/login?error="+Error.ACCESS_DENIED;
         }
         //gets the info from db using the session email address
         UserRegistration userDb = acService.getUser(httpSession);
