@@ -35,10 +35,6 @@
 * At the home page, you are able to see the post at a glance, and you can click view Post to access the webpage.
 * You can always go back to the configuration page if you want to change your subreddits.
 
-
-## Images
-
-
 ## Links
 The api documentation can be found here: [Reddit Api Documentation](https://www.reddit.com/dev/api/#GET_{sort})
 

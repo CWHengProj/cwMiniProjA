@@ -15,9 +15,5 @@ public class TutorialController {
 
         return "gettingStarted";
     }
-    @GetMapping("/howToUse")
-    public String getTutorial() {
-        return "howtouse";
-    }
     
 }
