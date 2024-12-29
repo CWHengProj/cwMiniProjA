@@ -23,10 +23,10 @@
 # How to use
 * Test out if the subreddits exist (if there's no error message it probably does)
 * During your first log in, you will be directed to the customization page:
-* **Select subreddits** by pressing **Space** after keying the name of the subreddit you want to add to your home page.
+* **Select subreddits** by pressing **Add Tag** after keying the name of the subreddit you want to add to your home page.
 
     ![](configGuides/configGuide1.png "Key in the name of the subreddit.")
-    ![](configGuides/configGuide2.png "Press Space bar to create a tag.")
+    ![](configGuides/configGuide2.png "Press Add Tag to create a tag.")
 * **Choose the number of posts** you would like to view per subreddit (There might be less posts that selected here if the subreddit is not active)
 
     ![](configGuides/configGuide3.png "Choose the number of posts you want to see.")
