@@ -27,7 +27,7 @@
 
     ![](configGuides/configGuide1.png "Key in the name of the subreddit.")
     ![](configGuides/configGuide2.png "Press Add Tag to create a tag.")
-* **Choose the number of posts** you would like to view per subreddit (There might be less posts that selected here if the subreddit is not active)
+* **Choose the number of posts** you would like to view per subreddit (There might be less posts than selected here if the subreddit is not active)
 
     ![](configGuides/configGuide3.png "Choose the number of posts you want to see.")
     
