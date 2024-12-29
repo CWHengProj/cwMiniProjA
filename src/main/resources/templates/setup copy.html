@@ -67,6 +67,10 @@
             cursor: pointer;
         }
 
+        .delete-button:hover {
+            color: red;
+        }
+
         .btn-primary {
             width: 100%;
         }
@@ -88,7 +92,7 @@
                 <label th:for="*{rawSubreddits}" class="form-label">Select Subreddits</label>
                 <div class="tags-input">
                     <ul id="tags"></ul>
-                    <input type="text" id="input-tag" placeholder="Press Space Bar" class="form-control">
+                    <input type="text" id="input-tag" placeholder="Press Enter after selecting" class="form-control">
                 </div>
                 <input type="hidden" th:field="*{rawSubreddits}" id="rawSubreddits">
             </div>
@@ -109,7 +113,7 @@
         const maxTags = 5;
 
         input.addEventListener('keydown', function (event) {
-            if (event.key === ' ') {
+            if (event.key === 'Enter') {
                 event.preventDefault();
                 const tagContent = input.value.trim();
 
