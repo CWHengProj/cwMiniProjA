@@ -34,6 +34,8 @@ public class RedditAPIService {
     SubRedditRepo srRepo;
     @Autowired
     ContentTypeService ctService;
+    @Autowired
+    MarkdownConverter markdownConverter;
     public List<Post> topPosts(String subreddit, String time, Integer limit){
         String url = String.format("https://oauth.reddit.com/r/%s/top.json?t=%s&limit=%d", subreddit, time, limit);
 
@@ -53,6 +55,9 @@ public class RedditAPIService {
             String selfText =jArray.get(i).asJsonObject().getJsonObject("data").getString("selftext");
             String postUrl =jArray.get(i).asJsonObject().getJsonObject("data").getString("url");
             String contentType = ctService.determineContent(postUrl);
+            //parsing from markdown to html
+            postTitle = markdownConverter.convertMarkdownToHtml(postTitle);
+            selfText = markdownConverter.convertMarkdownToHtml(selfText);
             Post post = new Post(ageRestricted,subredditName,postTitle,selfText,postUrl,contentType);
             if (ageRestricted==false){
                 subredditContent.add(post);
