@@ -25,11 +25,11 @@
 * During your first log in, you will be directed to the customization page:
 * **Select subreddits** by pressing **Enter** after keying the name of the subreddit you want to add to your home page.
 
-    ![](configGuides/configGuide1 "Key in the name of the subreddit.")
-    ![](configGuides/configGuide2 "Press Enter to create a tag.")
+    ![](configGuides/configGuide1.png "Key in the name of the subreddit.")
+    ![](configGuides/configGuide2.png "Press Enter to create a tag.")
 * **Choose the number of posts** you would like to view per subreddit (There might be less posts that selected here if the subreddit is not active)
 
-    ![](configGuides/configGuide3 "Choose the number of posts you want to see.")
+    ![](configGuides/configGuide3.png "Choose the number of posts you want to see.")
     
 * Let's Go!
 * At the home page, you are able to see the post at a glance, and you can click view Post to access the webpage.
